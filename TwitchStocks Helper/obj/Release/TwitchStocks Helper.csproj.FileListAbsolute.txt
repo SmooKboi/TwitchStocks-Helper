@@ -1,0 +1,18 @@
+C:\Users\smook\source\repos\TwitchStocks Helper\TwitchStocks Helper\bin\Release\TwitchStocks Helper.exe.config
+C:\Users\smook\source\repos\TwitchStocks Helper\TwitchStocks Helper\bin\Release\TwitchStocks Helper.exe
+C:\Users\smook\source\repos\TwitchStocks Helper\TwitchStocks Helper\bin\Release\TwitchStocks Helper.pdb
+C:\Users\smook\source\repos\TwitchStocks Helper\TwitchStocks Helper\bin\Release\MetroFramework.Design.dll
+C:\Users\smook\source\repos\TwitchStocks Helper\TwitchStocks Helper\bin\Release\MetroFramework.dll
+C:\Users\smook\source\repos\TwitchStocks Helper\TwitchStocks Helper\bin\Release\MetroFramework.Fonts.dll
+C:\Users\smook\source\repos\TwitchStocks Helper\TwitchStocks Helper\obj\Release\TwitchStocks_Helper.Form1.resources
+C:\Users\smook\source\repos\TwitchStocks Helper\TwitchStocks Helper\obj\Release\TwitchStocks_Helper.Properties.Resources.resources
+C:\Users\smook\source\repos\TwitchStocks Helper\TwitchStocks Helper\obj\Release\TwitchStocks Helper.csproj.GenerateResource.cache
+C:\Users\smook\source\repos\TwitchStocks Helper\TwitchStocks Helper\obj\Release\TwitchStocks Helper.csproj.CoreCompileInputs.cache
+C:\Users\smook\source\repos\TwitchStocks Helper\TwitchStocks Helper\obj\Release\TwitchStocks Helper.csproj.CopyComplete
+C:\Users\smook\source\repos\TwitchStocks Helper\TwitchStocks Helper\obj\Release\TwitchStocks Helper.exe
+C:\Users\smook\source\repos\TwitchStocks Helper\TwitchStocks Helper\obj\Release\TwitchStocks Helper.pdb
+C:\Users\smook\source\repos\TwitchStocks Helper\TwitchStocks Helper\bin\Release\TwitchStocks Helper.exe.manifest
+C:\Users\smook\source\repos\TwitchStocks Helper\TwitchStocks Helper\bin\Release\TwitchStocks Helper.application
+C:\Users\smook\source\repos\TwitchStocks Helper\TwitchStocks Helper\obj\Release\TwitchStocks Helper.csprojAssemblyReference.cache
+C:\Users\smook\source\repos\TwitchStocks Helper\TwitchStocks Helper\obj\Release\TwitchStocks Helper.exe.manifest
+C:\Users\smook\source\repos\TwitchStocks Helper\TwitchStocks Helper\obj\Release\TwitchStocks Helper.application

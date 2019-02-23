@@ -12,23 +12,32 @@ using System.Windows.Forms;
 using System.Windows.Automation;
 using System.Net;
 using System.IO;
+using System.Threading;
 
 namespace TwitchStocks_Helper
 {
     public partial class Form1 : MetroForm
     {
+        private string StreamerName = "";
+        private string Message = "";
+        private string Amount;
+        private int AmountTimes;
+        private bool isTimerDisabled = false;
+        private bool isNameChangeable = false;
+
         public Form1()
         {
             InitializeComponent();
             metroComboBox1.SelectedIndex = 0;
             metroComboBox2.SelectedIndex = 0;
+            backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker1_DoWork);
         }
 
-        private string StreamerName = "";
-        private string Message = "null";
-        private string Amount;
-        private int AmountTimes;
-        private bool isTimerDisabled = false;
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync();
+        }
+
 
         private string[] getStreamerNames()
         {
@@ -44,6 +53,22 @@ namespace TwitchStocks_Helper
                 }
             }
             return null;
+        }
+
+        private void streamerNameLoop()
+        {
+            while (true)
+            {
+                if (metroTextBox1.Text == "" && !metroCheckBox1.Checked)
+                {
+                    if ((getStreamerNames() != null) && (getStreamerNames()[0] != "Home") && (getStreamerNames()[0] != "Leaderboards") && (getStreamerNames()[0] != "History") && (getStreamerNames()[0] != "Portfolio") && (getStreamerNames()[0] != "FAQ") && (getStreamerNames()[0] != "Legal"))
+                    {
+                        BeginInvoke((Action)(() => metroTextBox1.Text = getStreamerNames()[0] + " (" + getStreamerNames()[1].ToUpper() + ")"));
+                    }
+                }
+                Thread.Sleep(1000);
+                Application.DoEvents();
+            }
         }
 
         private void selectAmountChanged(object sender, EventArgs e)
@@ -74,57 +99,31 @@ namespace TwitchStocks_Helper
 
         private void copyClick(object sender, EventArgs e)
         {
-            StreamerName = metroTextBox1.Text;
-            switch (metroComboBox1.SelectedItem.ToString())
+            if (!metroToggle1.Checked)
             {
-                case "Buy":
-                    Message = ":chart_with_upwards_trend: BUY **" + StreamerName + "** :chart_with_upwards_trend: \n";
-                    break;
-                case "Sell":
-                    Message = ":chart_with_downwards_trend: SELL **" + StreamerName + "** :chart_with_downwards_trend: \n";
-                    break;
-                case "Hold":
-                    Message = ":raised_hand: HOLD **" + StreamerName + "** :raised_hand: \n";
-                    break;
-                case "Warn":
-                    Message = ":warning: **" + StreamerName + "** MIGHT BE RISKY; TRY 1000 SHARES :warning: \n";
-                    break;
-            }
-            Clipboard.SetText(String.Concat(Enumerable.Repeat(Message, AmountTimes)).ToString());
-        }
-
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void changeName_Tick(object sender, EventArgs e)
-        {
-            if (getStreamerNames() != null)
-            {
-                Console.WriteLine(getStreamerNames()[0]);
-                if ((getStreamerNames()[0] != "Home") && (getStreamerNames()[0] != "Leaderboards") && (getStreamerNames()[0] != "History") && (getStreamerNames()[0] != "Portfolio") & (getStreamerNames()[0] != "FAQ") & (getStreamerNames()[0] != "Legal"))
+                switch (metroComboBox1.SelectedItem.ToString())
                 {
-                    metroTextBox1.Text = getStreamerNames()[0] + " (" + getStreamerNames()[1].ToUpper() + ")";
-                }
-            }
-        }
-
-        private void metroTextBox1_TextChanged(object sender, EventArgs e)
-        {
-            if (metroTextBox1.Text == "")
-            {
-                if (!isTimerDisabled)
-                {
-                    changeName.Start();
+                    case "Buy":
+                        Message = ":chart_with_upwards_trend: BUY **" + StreamerName + "** :chart_with_upwards_trend: \n";
+                        break;
+                    case "Sell":
+                        Message = ":chart_with_downwards_trend: SELL **" + StreamerName + "** :chart_with_downwards_trend: \n";
+                        break;
+                    case "Hold":
+                        Message = ":raised_hand: HOLD **" + StreamerName + "** :raised_hand: \n";
+                        break;
+                    case "Warn":
+                        Message = ":warning: **" + StreamerName + "** MIGHT BE RISKY; TRY 1000 SHARES :warning: \n";
+                        break;
                 }
             }
             else
             {
-                changeName.Stop();
+                Message = metroTextBox2.Text + "\n";
             }
+            Clipboard.SetText(String.Concat(Enumerable.Repeat(Message, AmountTimes)).ToString());
         }
+
 
         private void metroCheckBox1_MouseHover(object sender, EventArgs e)
         {
@@ -133,17 +132,62 @@ namespace TwitchStocks_Helper
                 "Check this if you encounter bugs", metroCheckBox1);
         }
 
+        private void metroToggle1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (metroToggle1.Checked)
+            {
+                metroComboBox1.Hide();
+                metroCheckBox1.Hide();
+                metroTextBox1.Hide();
+                metroTextBox2.Show();
+                metroButton2.Location = new Point(246, 149);
+            }
+            else
+            {
+
+                metroComboBox1.Show();
+                metroCheckBox1.Show();
+                metroTextBox1.Show();
+                metroTextBox2.Hide();
+                metroButton2.Location = new Point(246, 237);
+            }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            streamerNameLoop();
+        }
+
+        private void metroTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            StreamerName = metroTextBox1.Text;
+        }
+
         private void metroCheckBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (metroCheckBox1.Checked)
             {
-                changeName.Stop();
-                isTimerDisabled = true;
+                backgroundWorker1.CancelAsync();
             }
             else
             {
-                changeName.Start();
-                isTimerDisabled = false;
+                if (!backgroundWorker1.IsBusy)
+                {
+                    backgroundWorker1.RunWorkerAsync();
+                }
+            }
+        }
+
+        private void metroButton2_Click(object sender, EventArgs e)
+        {
+            if (metroToggle1.Checked)
+            {
+                metroTextBox2.Clear();
+            }
+            else
+            {
+                metroTextBox1.Clear();
+
             }
         }
     }
