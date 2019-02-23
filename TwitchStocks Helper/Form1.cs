@@ -28,6 +28,7 @@ namespace TwitchStocks_Helper
         public Form1()
         {
             InitializeComponent();
+            metroToggle1.ResetText();
             metroComboBox1.SelectedIndex = 0;
             metroComboBox2.SelectedIndex = 0;
             backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker1_DoWork);
@@ -140,16 +141,15 @@ namespace TwitchStocks_Helper
                 metroCheckBox1.Hide();
                 metroTextBox1.Hide();
                 metroTextBox2.Show();
-                metroButton2.Location = new Point(246, 149);
+                metroButton2.Location = new Point(434, 187);
             }
             else
             {
-
                 metroComboBox1.Show();
                 metroCheckBox1.Show();
                 metroTextBox1.Show();
                 metroTextBox2.Hide();
-                metroButton2.Location = new Point(246, 237);
+                metroButton2.Location = new Point(434, 237);
             }
         }
 

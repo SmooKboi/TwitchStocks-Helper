@@ -79,14 +79,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TwitchStocks Helper.exe" size="19424">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="TwitchStocks Helper.exe" size="21984">
       <assemblyIdentity name="TwitchStocks Helper" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>auVbsUETucX/I0/OW3cmso/7w9HPYwETDFTkUIgkBcA=</dsig:DigestValue>
+        <dsig:DigestValue>E1RQaCPIpHk9mDDv9+mKB+Zh/SBpaUpsPv5rsiO2iq8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
